@@ -1,5 +1,8 @@
 import PySimpleGUI as sg
 
+# Suppress the PySimpleGUI registration prompt
+sg.set_options(show_register_popup=False)
+
 # Define the layout of the GUI
 layout = [
     [sg.Text("File Format Converter", font=("Helvetica", 16), justification="center", expand_x=True)],
