@@ -2,7 +2,7 @@
 import PySimpleGUI as sg
 import os
 import time
-from converters import convert_text_to_pdf  # Import the conversion function
+from converters import convert_text_to_pdf,convert_pdf_to_text  # Import the conversion function
 
 # Define supported input formats
 SUPPORTED_INPUT_FORMATS = [".pdf", ".csv", ".json", ".md", ".txt"]
@@ -83,12 +83,20 @@ while True:
 
                 for fmt in selected_formats:
                     if fmt == "PDF" and ext == ".txt":
-                        new_pdf_file = os.path.join(folder, f"{base}.pdf")
+                        new_pdf_file = os.path.join(folder, f"{os.path.splitext(base)[0]}.pdf")
                         print(f"Creating {new_pdf_file}")
                         
                         # Call the converter function for PDF
                         convert_text_to_pdf(file, new_pdf_file)
 
+                    elif fmt == "TXT" and ext == ".pdf":
+                        new_txt_file = os.path.join(folder, f"{os.path.splitext(base)[0]}.txt")
+                        print(f"Creating {new_txt_file}")
+                        # Call the converter function for converting PDF to text
+                        convert_pdf_to_text(file, new_txt_file)
+
+                    else:
+                        print(f"Conversion not supported for the combination of {fmt} and {ext}.")
                     # For other formats (e.g., Excel, JSON, etc.), add their conversion logic here.
                     # This part of your code can be extended as needed.
 
