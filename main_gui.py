@@ -2,8 +2,8 @@
 import PySimpleGUI as sg
 import os
 import time
-from converters import convert_text_to_pdf,convert_pdf_to_text,convert_csv_to_text,convert_text_to_csv  # Import the conversion functions
-
+#from converters import convert_text_to_pdf,convert_pdf_to_text,convert_csv_to_text,convert_text_to_csv  # Import the conversion functions
+from converters import *
 # Define supported input formats
 SUPPORTED_INPUT_FORMATS = [".pdf", ".csv", ".json", ".md", ".txt"]
 
@@ -25,7 +25,7 @@ window = sg.Window("MultiFormatConverter", layout, resizable=True, finalize=True
 
 # Function to simulate subtle "fade-in" animation effect
 def fade_in_effect():
-    window['-LOG_OUTPUT-'].update("Loading Interface...")
+    window['-LOG_OUTPUT-'].update("READY...")
     time.sleep(1)
 
 fade_in_effect()
@@ -82,34 +82,64 @@ while True:
                 print(f"Available Output Formats (excluding {ext}): {selected_formats}")
 
                 for fmt in selected_formats:
+                    output_file = os.path.join(folder, f"{os.path.splitext(base)[0]}.{fmt.lower()}")
+
                     if fmt == "PDF" and ext == ".txt":
-                        new_pdf_file = os.path.join(folder, f"{os.path.splitext(base)[0]}.pdf")
-                        print(f"Creating {new_pdf_file}")
-                        
-                        # Call the converter function for PDF
-                        convert_text_to_pdf(file, new_pdf_file)
+                        print(f"Creating {output_file}")
+                        convert_text_to_pdf(file, output_file)
 
                     elif fmt == "TXT" and ext == ".pdf":
-                        new_txt_file = os.path.join(folder, f"{os.path.splitext(base)[0]}.txt")
-                        print(f"Creating {new_txt_file}")
-                        # Call the converter function for converting PDF to text
-                        convert_pdf_to_text(file, new_txt_file)
+                        print(f"Creating {output_file}")
+                        convert_pdf_to_text(file, output_file)
 
                     elif fmt == "TXT" and ext == ".csv":
-                        new_txt_file = os.path.join(folder, f"{os.path.splitext(base)[0]}.txt")
-                        print(f"Creating {new_txt_file}")
-                        # Call the converter function for converting CSV to text
-                        convert_csv_to_text(file, new_txt_file)
+                        print(f"Creating {output_file}")
+                        convert_csv_to_text(file, output_file)
 
                     elif fmt == "CSV" and ext == ".txt":
-                        new_csv_file = os.path.join(folder, f"{os.path.splitext(base)[0]}.csv")
-                        print(f"Creating {new_csv_file}")
-                        # Call the converter function for converting text to CSV
-                        convert_text_to_csv(file, new_csv_file)
+                        print(f"Creating {output_file}")
+                        convert_text_to_csv(file, output_file)
+
+                    elif fmt == "JSON" and ext == ".txt":
+                        print(f"Creating {output_file}")
+                        convert_text_to_json(file, output_file)
+
+                    elif fmt == "TXT" and ext == ".json":
+                        print(f"Creating {output_file}")
+                        convert_json_to_text(file, output_file)
+
+                    elif fmt == "CSV" and ext == ".pdf":
+                        print(f"Creating {output_file}")
+                        convert_pdf_to_csv(file, output_file)
+
+                    elif fmt == "PDF" and ext == ".csv":
+                        print(f"Creating {output_file}")
+                        convert_csv_to_pdf(file, output_file)
+
+                    elif fmt == "TXT" and ext == ".md":
+                        print(f"Creating {output_file}")
+                        convert_md_to_text(file, output_file)
+
+                    elif fmt == "Markdown" and ext == ".txt":
+                        print(f"Creating {output_file}")
+                        convert_text_to_md(file, output_file)
+
+                    elif fmt == "JSON" and ext == ".csv":
+                        print(f"Creating {output_file}")
+                        convert_csv_to_json(file, output_file)
+
+                    elif fmt == "CSV" and ext == ".json":
+                        print(f"Creating {output_file}")
+                        convert_json_to_csv(file, output_file)
+
+                    elif fmt == "Markdown" and ext == ".pdf":
+                        print(f"Creating {output_file}")
+                        convert_pdf_to_md(file, output_file)
+
+                    elif fmt == "PDF" and ext == ".md":
+                        print(f"Creating {output_file}")
+                        convert_md_to_pdf(file, output_file)
 
                     else:
                         print(f"Conversion not supported for the combination of {fmt} and {ext}.")
-                    # For other formats (e.g., JSON, etc.), add their conversion logic here.
-                    # This part of your code can be extended as needed.
-
 window.close()
