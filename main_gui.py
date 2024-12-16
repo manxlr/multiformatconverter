@@ -2,7 +2,7 @@
 import PySimpleGUI as sg
 import os
 import time
-from converters import convert_text_to_pdf,convert_pdf_to_text  # Import the conversion function
+from converters import convert_text_to_pdf,convert_pdf_to_text,convert_csv_to_text,convert_text_to_csv  # Import the conversion functions
 
 # Define supported input formats
 SUPPORTED_INPUT_FORMATS = [".pdf", ".csv", ".json", ".md", ".txt"]
@@ -12,7 +12,7 @@ layout = [
     [sg.Text("MultiFormatConverter", font=("Helvetica Bold", 20), justification="center", expand_x=True)],
     [sg.Text("Select File(s):"), sg.Input(key="-FILE_PATHS-", enable_events=True, readonly=True), sg.FilesBrowse()],
     [sg.Text("Choose Output Formats:")],
-    [sg.Checkbox("PDF", key="-PDF-"), sg.Checkbox("Excel (CSV)", key="-EXCEL-"),
+    [sg.Checkbox("PDF", key="-PDF-"), sg.Checkbox("CSV", key="-CSV-"),
      sg.Checkbox("JSON", key="-JSON-"), sg.Checkbox("Markdown", key="-MARKDOWN-"), sg.Checkbox("TXT", key="-TXT-")],
     [sg.Button("Select All", key="-SELECT_ALL-"), sg.Button("Deselect All", key="-DESELECT_ALL-")],
     [sg.Button("Convert", key="-CONVERT-", size=(10, 1)), sg.Button("Exit", key="-EXIT-", size=(10, 1))],
@@ -41,14 +41,14 @@ while True:
 
     if event == "-SELECT_ALL-":
         window["-PDF-"].update(True)
-        window["-EXCEL-"].update(True)
+        window["-CSV-"].update(True)
         window["-JSON-"].update(True)
         window["-MARKDOWN-"].update(True)
         window["-TXT-"].update(True)
 
     if event == "-DESELECT_ALL-":
         window["-PDF-"].update(False)
-        window["-EXCEL-"].update(False)
+        window["-CSV-"].update(False)
         window["-JSON-"].update(False)
         window["-MARKDOWN-"].update(False)
         window["-TXT-"].update(False)
@@ -57,7 +57,7 @@ while True:
         file_paths = values["-FILE_PATHS-"].split(";")
         selected_formats = [
             "PDF" if values["-PDF-"] else None,
-            "Excel (CSV)" if values["-EXCEL-"] else None,
+            "CSV" if values["-CSV-"] else None,
             "JSON" if values["-JSON-"] else None,
             "Markdown" if values["-MARKDOWN-"] else None,
             "TXT" if values["-TXT-"] else None
@@ -95,9 +95,21 @@ while True:
                         # Call the converter function for converting PDF to text
                         convert_pdf_to_text(file, new_txt_file)
 
+                    elif fmt == "TXT" and ext == ".csv":
+                        new_txt_file = os.path.join(folder, f"{os.path.splitext(base)[0]}.txt")
+                        print(f"Creating {new_txt_file}")
+                        # Call the converter function for converting CSV to text
+                        convert_csv_to_text(file, new_txt_file)
+
+                    elif fmt == "CSV" and ext == ".txt":
+                        new_csv_file = os.path.join(folder, f"{os.path.splitext(base)[0]}.csv")
+                        print(f"Creating {new_csv_file}")
+                        # Call the converter function for converting text to CSV
+                        convert_text_to_csv(file, new_csv_file)
+
                     else:
                         print(f"Conversion not supported for the combination of {fmt} and {ext}.")
-                    # For other formats (e.g., Excel, JSON, etc.), add their conversion logic here.
+                    # For other formats (e.g., JSON, etc.), add their conversion logic here.
                     # This part of your code can be extended as needed.
 
 window.close()
