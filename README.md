@@ -48,6 +48,7 @@ A versatile Python GUI application to convert between various file formats inclu
 
 - Go to root directory in command prompt and run **python main_gui.py** to bring up the conversion GUI. Now select **input file** and then select the **output formats (even more than one)** and click convert.
 - The outputs of same name will be created in the same directory as the input file.
+![Alt text](assets/Main_Program_GUI_20241218.png)
 
 
 ---
