@@ -43,6 +43,18 @@ A versatile Python GUI application to convert between various file formats inclu
 6. [Donations](#-donations)
 
 ---
+## 📥 **Download Executable**
+
+You can download the latest version of the **multiformatconverter** executable from the [Releases](https://github.com/manxlr/multiformatconverter/releases) page.
+### Windows [Program](https://github.com/manxlr/multiformatconverter/releases/download/v1.0.0/multiformatconverter.exe)
+
+---
+
+## 🚀 **Usage**
+
+- Go to the root directory in the command prompt and run **python main_gui.py** to bring up the conversion GUI. Now select **input file** and then select the **output formats (even more than one)** and click convert.
+- The outputs of the same name will be created in the same directory as the input file.
+![Alt text](assets/Main_Program_GUI_20241218.png)
 
 ## 🚀 **Usage**
 
