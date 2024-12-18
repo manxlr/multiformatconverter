@@ -26,7 +26,7 @@ A versatile Python GUI application to convert between various file formats inclu
   Prevents unsupported or erroneous conversions, ensuring all conversions follow proper format constraints.
 
 - **Batch Conversion Support**  
-  Convert multiple files simultaneously with convenient selection checkboxes.
+  Convert to multiple file formats simultaneously with convenient selection checkboxes.
 
 - **Open-Source Project**  
   Fully transparent and open for contributions under the MIT license.
@@ -35,15 +35,12 @@ A versatile Python GUI application to convert between various file formats inclu
 
 ## 📝 Table of Contents
 
-1. [Installation](#installation)  
-2. [Usage](#usage)  
-3. [GUI Overview](#gui-overview)  
-4. [Testing](#testing)  
-5. [Changelog](#changelog)  
-6. [Contribution](#contribution)  
-7. [License](#license)  
-8. [Contact](#contact)  
-9. [Donations](#donations)
+1. [Usage](#-usage)  
+2. [Robust Conversions](#-robust-conversions)  
+3. [Contribution](#-contribution)  
+4. [License](#-license)  
+5. [Contact](#-contact)  
+6. [Donations](#-donations)
 
 ---
 
